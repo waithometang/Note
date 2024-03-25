@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片懒加载</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      img {
+        height: 200px;
+        border: 1px solid #f00;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img data-src="./img1.png" src="./spin.gif" alt="" />
+      <img data-src="./img2.png" src="./spin.gif" alt="" />
+      <img data-src="./img3.png" src="./spin.gif" alt="" />
+      <img data-src="./img4.png" src="./spin.gif" alt="" />
+      <img data-src="./img5.png" src="./spin.gif" alt="" />
+      <img data-src="./img6.jpg" src="./spin.gif" alt="" />
+      <img data-src="./img7.png" src="./spin.gif" alt="" />
+      <img data-src="./img8.jpg" src="./spin.gif" alt="" />
+      <img data-src="./img9.jpg" src="./spin.gif" alt="" />
+    </div>
+  </body>
+  <script>
+    const imgList = document.getElementsByTagName("img");
+    let index = 0; // 防止每次都从第一张开始
+    /**
+     * @description: 节流 在一定时间内只触发一次，类似于英雄技能释放
+     * @param {Function} fn
+     * @param {Number} wait
+     * @return {*}
+     */
+    function throttle(fn, wait) {
+      let timer;
+      return function () {
+        const context = this;
+        const args = arguments;
+        if (!timer) {
+          timer = setTimeout(() => {
+            fn.apply(context, args);
+            timer = null;
+          }, wait);
+        }
+      };
+    }
+    /**
+     * @description: 图片懒加载
+     * @return {*}
+     */
+    function lazyLoadImg() {
+      for (let i = index; i < imgList.length; i++) {
+        const img = imgList[i];
+        const innerHeight = window.innerHeight; // 可视化区域
+        const scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop; //滚动条距离顶部高度
+        if (img.offsetTop < innerHeight + scrollTop) {
+          // 判断是否出现在可视化区域
+          img.src = img.dataset.src;
+          index++;
+        }
+      }
+    }
+    lazyLoadImg();
+    window.addEventListener("scroll", throttle(lazyLoadImg, 100));
+  </script>
+</html>

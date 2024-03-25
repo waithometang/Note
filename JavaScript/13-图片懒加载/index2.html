@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片懒加载</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      img {
+        height: 200px;
+        border: 1px solid #f00;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img data-src="./img1.png" src="./spin.gif" alt="" />
+      <img data-src="./img2.png" src="./spin.gif" alt="" />
+      <img data-src="./img3.png" src="./spin.gif" alt="" />
+      <img data-src="./img4.png" src="./spin.gif" alt="" />
+      <img data-src="./img5.png" src="./spin.gif" alt="" />
+      <img data-src="./img6.jpg" src="./spin.gif" alt="" />
+      <img data-src="./img7.png" src="./spin.gif" alt="" />
+      <img data-src="./img8.jpg" src="./spin.gif" alt="" />
+      <img data-src="./img9.jpg" src="./spin.gif" alt="" />
+    </div>
+  </body>
+  <script>
+    /*
+    IntersectionObserver 接口（从属于 Intersection Observer API）提供了一种异步观察目标元素与其祖先元素或顶级文档视口（viewport）交叉状态的方法。其祖先元素或视口被称为根（root）。
+    */
+    const imgList = Array.from(document.getElementsByTagName("img"));
+    function lazyLoadImg(entries, observe) {
+      entries.forEach((entry) => {
+        // intersectionRatio 返回intersectionRect 与 boundingClientRect 的比例值。。
+        // isIntersecting 返回一个布尔值，如果目标元素与交叉区域观察者对象 (intersection observer) 的根相交
+        if (entry.intersectionRatio > 0) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          observe.unobserve(img);
+        }
+      });
+    }
+    //  https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver/IntersectionObserver
+    const intersectionObserver = new IntersectionObserver(lazyLoadImg);
+    imgList.forEach((img) => {
+      intersectionObserver.observe(img);
+    });
+  </script>
+</html>
