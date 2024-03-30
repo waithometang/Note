@@ -11,3 +11,30 @@ class Person {
 }
 
 const p = new Person();
+function isObject(target) {
+  return (
+    target !== null &&
+    (typeof target === "object" || typeof target === "function")
+  );
+}
+function _new(fn, ...args) {
+  // 创建一个空的对象
+  const o = Object.create(fn.prototype);
+  const result = fn.apply(o, args);
+  return result === isObject(result) ? result : o;
+
+  // const obj = new Object();
+  // // 获得构造函数 【不懂，获取到的是undefined】
+  // const con = Array.prototype.shift.call(arguments);
+  // console.log(con);
+  // // 链接到原型 （不推荐使用）
+  // obj.__proto__ = con.prototype;
+  // // 绑定 this，执行构造函数
+  // const result = con.apply(obj, arguments);
+  // // 确保 new 出来的是个对象
+  // return result === isObject(result) ? result : obj;
+}
+function Animal(name) {
+  this.name = name;
+}
+const n = _new(Animal, "dog");
