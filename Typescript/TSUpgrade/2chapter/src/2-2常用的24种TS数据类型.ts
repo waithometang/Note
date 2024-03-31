@@ -7,7 +7,7 @@
  * 6、合成类型：交叉类型,联合类型
  * 7、字面量类型
  */
-// 跟类型，可以赋值除null和undefined的所有类型
+// 根类型，可以赋值除null和undefined的所有类型
 let o1: Object;
 let o2: {};
 
@@ -15,7 +15,7 @@ o1 = 1;
 o1 = false;
 o2 = { age: 20 };
 
-// 交叉类型
+// 联合类型
 let t: number | string = 1;
 t = "123";
 
@@ -24,7 +24,7 @@ type Name = { name: string };
 type Age = { age: number };
 let person1: Name = { name: "zhangsan" };
 let person2: Age = { age: 20 };
-// 联合类型
+// 交叉类型
 let person3: Name & Age = { name: "lisi", age: 18 };
 
 // 字面量类型 只能是后面定义的数字
