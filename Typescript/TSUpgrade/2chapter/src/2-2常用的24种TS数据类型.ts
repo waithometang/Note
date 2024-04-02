@@ -14,7 +14,8 @@ let o2: {};
 o1 = 1;
 o1 = false;
 o2 = { age: 20 };
-
+// o1 = undefined; 不能将类型“undefined”分配给类型“Object”
+// o2 = null;
 // 联合类型
 let t: number | string = 1;
 t = "123";
