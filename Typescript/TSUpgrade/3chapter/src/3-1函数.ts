@@ -11,4 +11,14 @@ let animal: Animal = function (name, legs, color) {};
 // 剩余参数
 function getInfo(name: string, ...rest: any): any {}
 getInfo("zhangsan", 20);
+
+type SubInfo = { username: string; age: number; phone: number };
+function subInfo(info: SubInfo) {}
+let subInfo1: SubInfo = { username: "zs", age: 20, phone: 111 };
+subInfo(subInfo1);
+subInfo({
+  username: "zs1",
+  age: 10,
+  phone: 222,
+});
 export {};
