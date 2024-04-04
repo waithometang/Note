@@ -19,3 +19,4 @@ let n2: null = null;
 // let n3: object = null;
 // let n4: void = null;
 // let n5: undefined = null;
+export {};

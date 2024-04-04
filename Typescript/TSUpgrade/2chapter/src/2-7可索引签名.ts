@@ -42,3 +42,4 @@ type AKeys = keyof Animal;
 // 借用以下方法，可以得出
 type Pkeys<T> = T extends any ? T : never;
 type PK = Pkeys<keyof Animal>; // "name" | typeof foo | "legs" | "bar"
+export {};
