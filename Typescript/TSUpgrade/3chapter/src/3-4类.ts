@@ -51,4 +51,23 @@ const dateUtil3 = DateUtil2.getInstance();
 const dateUtil4 = DateUtil2.getInstance();
 console.log(dateUtil3 === dateUtil4); // true
 
+class Animal {
+  _age!: number;
+  get age(): number {
+    return this._age;
+  }
+  set age(value) {
+    console.log("set", value);
+    if (value > 10 && value < 30) {
+      this._age = value;
+    } else {
+      throw new Error("不在范围内");
+    }
+  }
+}
+const a = new Animal();
+a.age = 20;
+// a.age = 100; // Error: 不在范围内
+console.log(a.age);
+
 export {};
