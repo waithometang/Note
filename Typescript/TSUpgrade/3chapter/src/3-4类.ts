@@ -10,7 +10,45 @@ class People {
     this.age = age;
   }
   say() {}
+  eat() {}
 }
 let p1 = new People("zs", 12);
 let p2 = new People("ls", 20);
+// 静态方法 挂载到类对象上，只能通过类访问
+class DateUtil {
+  static formatDate() {}
+  static diffDate() {}
+}
+// 单例模式 创建出来的实例对象都是一样的
+class DateUtil1 {
+  static dateUtil1 = new DateUtil1();
+  private constructor() {
+    console.log("创建构造函数...立即执行，即使外部没有调用");
+  }
+  formatDate() {}
+  diffDate() {}
+}
+const dateUtil1 = DateUtil1.dateUtil1;
+const dateUtil2 = DateUtil1.dateUtil1;
+console.log(dateUtil1 === dateUtil2); // true
+// 只有调用才执行
+class DateUtil2 {
+  static instance: DateUtil2;
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new DateUtil2();
+    }
+    return this.instance;
+  }
+  private constructor() {
+    console.log("创建构造函数...");
+  }
+  formatDate() {}
+  diffDate() {}
+}
+
+const dateUtil3 = DateUtil2.getInstance();
+const dateUtil4 = DateUtil2.getInstance();
+console.log(dateUtil3 === dateUtil4); // true
+
 export {};
