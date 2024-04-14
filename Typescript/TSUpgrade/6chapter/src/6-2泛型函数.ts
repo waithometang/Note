@@ -1,4 +1,4 @@
-function quickSort<T>(arr: Array<T>): Array<T> {
+export function quickSort<T>(arr: Array<T>): Array<T> {
   if (arr.length < 2) {
     return arr;
   }
@@ -22,3 +22,5 @@ let result = quickSort(numArr); // number []自动推断出来
 result.forEach((item) => {
   item.toFixed(2);
 });
+
+export {};
