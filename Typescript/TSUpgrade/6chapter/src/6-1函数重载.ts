@@ -4,8 +4,8 @@ interface IMessage {
   msg: string;
 }
 enum MsgType {
-  Img = 1,
-  Audio = 2,
+  Img = "Img",
+  Audio = "Audio",
 }
 
 const message: IMessage[] = [
@@ -30,7 +30,10 @@ const message: IMessage[] = [
     msg: "first id 4",
   },
 ];
+// 函数重载：一组具有多个相同名字，不同参数列表的和返回值无关并且具有一个实现签名和一个或多个重载签名的函数
 
+function searchMsg(condition: MsgType): IMessage[];
+function searchMsg(condition: number): IMessage | undefined;
 function searchMsg(
   condition: number | MsgType
 ): IMessage | IMessage[] | undefined {
@@ -40,6 +43,11 @@ function searchMsg(
     return message.filter((item) => item.type === condition);
   }
 }
-// 由于返回联合类型，访问属性是公共的
-(searchMsg(1) as IMessage).id;
-searchMsg(MsgType.Audio) as IMessage[];
+// // 由于返回联合类型，访问属性是公共的
+// (searchMsg(1) as IMessage).id;
+// searchMsg(MsgType.Audio) as IMessage[];
+
+console.log(searchMsg(1)?.msg);
+searchMsg(MsgType.Audio).forEach((item) => {
+  console.log(item.msg);
+});
