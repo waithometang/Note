@@ -20,3 +20,5 @@ function cross<T extends object, U extends object>(obj1: T, obj2: U): T & U {
 }
 
 console.log(cross(i, i2)); // { a: 1, b: 's', c: true, d: 'e' }
+
+export {};
