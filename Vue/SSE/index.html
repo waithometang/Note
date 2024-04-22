@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Server-Sent Events Example</title>
+  </head>
+  <body>
+    <h1>Server-Sent Events Example</h1>
+    <button onclick="handleClose()">关闭推送</button>
+
+    <div id="sse-content"></div>
+    <script>
+      // 创建一个 EventSource 对象连接到 SSE 服务器
+      const eventSource = new EventSource("http://localhost:3000/sse");
+
+      // 监听来自服务器的消息
+      eventSource.onmessage = function (event) {
+        console.log(event);
+        // 在页面上显示收到的消息
+        const sseContent = document.getElementById("sse-content");
+        sseContent.innerHTML += "<p>" + event.data + "</p>";
+      };
+      function handleClose() {
+        eventSource.close();
+      }
+    </script>
+  </body>
+</html>
