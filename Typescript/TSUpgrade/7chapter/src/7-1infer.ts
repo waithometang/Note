@@ -21,5 +21,5 @@ let chineseMath = new Set([chinese, math]);
 type ElementType<T> = T extends (infer U)[] ? U : never;
 type SetSubject = ElementType<typeof chineseMath>[];
 
-let S = typeof chineseMath
+let S = typeof chineseMath;
 export {};
