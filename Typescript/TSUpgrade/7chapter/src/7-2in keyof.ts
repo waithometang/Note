@@ -25,3 +25,4 @@ let p: GenericityType<Person> = {
   age: 10,
   gender: "male",
 };
+export {};
