@@ -24,3 +24,5 @@ type O2 = { kind: "circle"; radius: number };
 
 let O3: O2 = { kind: "circle", radius: 1 };
 let O4: O1 = O3;
+
+export {};
