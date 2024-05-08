@@ -1,0 +1,17 @@
+单表查询：
+插入：INSERT INTO student VALUES (0,'yy',26,"2024-05-07 11:23:58")
+修改：UPDATE student SET age=100 WHERE id = 1
+删除：DELETE FROM student WHERE id =2
+查询：SELECT * FROM student WHERE id=1
+模糊查询：SELECT * FROM student WHERE NAME LIKE "%w%"
+按照条件排序：SELECT * FROM student order BY age 【asc：升序，desc：降序】多个条件SELECT * FROM student order BY age desc,id desc【逗号隔开】
+条数：SELECT COUNT(*) FROM student
+最大：SELECT MAX(id) FROM student
+平均值：SELECT avg(age) FROM student
+分组：SELECT MAX(id),SUM(id) FROM student GROUP BY age 
+分组后条件筛选：SELECT classid,avg(age) FROM student GROUP BY classid having avg(age)>20;
+
+多表查询：
+全连接：SELECT * FROM student,classstu WHERE student.classId = classstu.id 【SELECT * FROM student s,classstu c WHERE s.classId = c.id  数据表别名】
+左查询：SELECT * FROM classstu LEFT JOIN student ON classstu.id = student.classId; 【ON是条件，匹配所有左边表的数据】
+右查询：SELECT * FROM classstu RIGHT JOIN student ON classstu.id = student.classId; 【ON是条件，匹配所有右边表的数据】
