@@ -16,3 +16,4 @@ type Mname = Item["name" | "age"] // type Mname = string | number
 // 索引时只能使用类型，这意味着不能使用 a const 来引用变量：
 const key = "age"
 // type Age =Item[key]// Type 'key' cannot be used as an index type.'key' refers to a value, but is being used as a type here. Did you mean 'typeof key'
+export {}
