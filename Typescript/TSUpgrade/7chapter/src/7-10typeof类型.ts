@@ -16,4 +16,4 @@ function f() {
 // }
 let fun: ReturnType<typeof f> // 直接传入f会报错，接收的是类型，而不是值
 
-
+export {}
