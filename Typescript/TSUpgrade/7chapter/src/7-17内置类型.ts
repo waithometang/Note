@@ -128,11 +128,74 @@ declare function f1(): { a: number; b: string };
 type R4 = ReturnType<typeof f1>;
 
 // InstanceType<Type> 构造一个由 Type 中构造函数的实例类型组成的类型 type InstanceType<T extends abstract new (...args: any) => any> = T extends abstract new (...args: any) => infer R ? R : any
+class CC {
+    a!: string;
+    b!: number;
+}
+// type C = CC
+type C = InstanceType<typeof CC>
+// type C1 = any
+type C1 = InstanceType<any>;
+// type C2 = never
+type C2 = InstanceType<never>;
 
+// NoInfer<Type> 阻止对所包含类型的推断。除了阻止推理之外，NoInfer<Type> 与 Type 相同 type NoInfer<T> = intrinsic
+function createStreetLight<C extends string>(
+    colors: C[],
+    defaultColor?: NoInfer<C>,
+) {
+    // ...
+}
+// function createStreetLight<"red" | "yellow" | "green" > (colors: ("red" | "yellow" | "green")[], defaultColor ?: "red" | "yellow" | "green" | undefined): void
+createStreetLight(["red", "yellow", "green"], "blue"); // Error
+createStreetLight(["red", "yellow", "green"], "red"); // OK
 
+// ThisParameterType<Type> 提取函数类型的 this 参数的类型，如果函数类型没有 this 参数，则为未知 type ThisParameterType<T> = T extends (this: infer U, ...args: never) => any ? U : unknown
+function toHex(this: Number) {
+    return this.toString(16);
+}
+// type F = (this: Number) => string
+type F = typeof toHex
+function NumberToString(n: ThisParameterType<typeof toHex>) {
+    return toHex.apply(n)
+}
 
+// OmitThisParameter<Type> 从 Type 中删除 this 参数。如果 Type 没有显式声明此参数，则结果只是 Type。否则，将从 Type 创建一个不带 this 参数的新函数类型。泛型被删除，只有最后一个重载签名被传播到新的函数类型中 
+// type OmitThisParameter<T> = unknown extends ThisParameterType<T> ? T : T extends (...args: infer A) => infer R ? (...args: A) => R : T
+// const fiveToHex: () => string
+const fiveToHex: OmitThisParameter<typeof toHex> = toHex.bind(5);
 
+// ThisType<Type> 此实用程序不返回转换后的类型。相反，它充当上下文 this 类型的标记。请注意，必须启用 noImplicitThis 标志才能使用此实用程序。 interface ThisType<T>
+type ObjectDescriptor<D, M> = {
+    data?: D;
+    methods?: M & ThisType<D & M>; // Type of 'this' in methods is D & M
+};
 
+function makeObject<D, M>(desc: ObjectDescriptor<D, M>): D & M {
+    let data: object = desc.data || {};
+    let methods: object = desc.methods || {};
+    return { ...data, ...methods } as D & M;
+}
+
+let obj = makeObject({
+    data: { x: 0, y: 0 },
+    methods: {
+        moveBy(dx: number, dy: number) {
+            this.x += dx; // Strongly typed this
+            this.y += dy; // Strongly typed this
+        },
+    },
+});
+
+obj.x = 10;
+obj.y = 20;
+obj.moveBy(5, 5);
+
+// 固有字符串操作类型
+Uppercase<StringType> // 转大写
+Lowercase<StringType> // 转小写
+Capitalize<StringType> // 首字母大写
+Uncapitalize<StringType> // 首字母小写
 
 
 
