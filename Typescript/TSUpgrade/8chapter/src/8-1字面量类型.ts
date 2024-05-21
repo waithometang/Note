@@ -36,62 +36,31 @@ person.on("ageChange", (val) => {
     console.log(val.toFixed(1))
 })
 
+// Uppercase<StringType> 将字符串中的每个字符转换为大写版本 type Uppercase<S extends string> = intrinsic
+type Greeting = "Hello, world"
+// type ShoutyGreeting = "HELLO, WORLD"
+type ShoutyGreeting = Uppercase<Greeting>
 
+type ASCIICacheKey<Str extends string> = `ID-${Uppercase<Str>}`
+// ID_MY_APP
+type MainID = ASCIICacheKey<"my_app">
 
+// Lowercase<StringType> 将字符串中的每个字符转换为等效的小写字符 
+type Greeting = "Hello, world"
+// type QuietGreeting = "hello, world"
+type QuietGreeting = Lowercase<Greeting>
+type ASCIICacheKey<Str extends string> = `id-${Lowercase<Str>}`
+// id_my_app
+type MainID = ASCIICacheKey<"MY_APP">
 
+// Capitalize<StringType> 将字符串中的第一个字符转换为等效的大写字符
+type LowercaseGreeting = "hello, world";
+// type Greeting = "Hello, world"
+type Greeting = Capitalize<LowercaseGreeting>;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Uncapitalize<StringType> 将字符串中的第一个字符转换为等效的小写字符
+type UppercaseGreeting = "HELLO WORLD";
+// type UncomfortableGreeting = "hELLO WORLD"
+type UncomfortableGreeting = Uncapitalize<UppercaseGreeting>;
+              
+export {}
