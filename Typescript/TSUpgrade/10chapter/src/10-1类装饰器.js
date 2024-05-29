@@ -129,3 +129,72 @@ var Product = (function () {
   })();
   return (Product = _classThis);
 })();
+
+// 旧版本源码
+
+function ProductDecorator(targetClass) {
+  var target = new targetClass();
+  target.buy();
+}
+
+var __esDecorate =
+  (this && this.__esDecorate) ||
+  function (decorators, target, key, desc) {
+    var argsNum = arguments.length;
+    console.log(argsNum); // 2 只有两个参数
+    /* arguments参数：
+    2--装饰器修饰的是类或者构造函数参数，targetinfo=target类名
+    4--装饰器修饰的是方法【第四个参数desc等于null】targetinfo=该方法的数据Object.getOwnPropertyDescriptor(target, key)
+    3--装饰器修饰的是方法参数或者属性，targetinfo=undefined */
+    var targetinfo =
+      argsNum < 3
+        ? target
+        : desc === null
+        ? (desc = Object.getOwnPropertyDescriptor(target, key))
+        : desc;
+    // 保存装饰器数组元素
+    var decorator;
+    if (
+      typeof Reflect === "object" &&
+      typeof Reflect.decorator === "function"
+    ) {
+      targetinfo = Reflect.decorator(decorators, target, key, desc);
+    } else {
+      // 装饰器循环，倒着来
+      for (let i = decorators.length - 1; i >= 0; i--) {
+        if ((decorator = decorators[i])) {
+          targetinfo =
+            (argsNum < 3
+              ? decorator(target)
+              : argsNum > 3
+              ? decorator(target, key, targetinfo)
+              : decorator(target, key)) || targetinfo;
+          console.log("targetinfo:", targetinfo); // targetinfo: [Function: Product]
+        }
+      }
+    }
+    // 最终返回的是targetinfo
+    return (
+      argsNum > 3 &&
+        targetinfo &&
+        Object.defineProperty(target, key, targetinfo),
+      targetinfo
+    );
+  };
+
+var Product = /** @class */ (function () {
+  function Product(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  Product.prototype.buy = function () {
+    console.log("购买" + this.name);
+  };
+  Product.prototype.price = function () {
+    console.log(this.name + "价格是：9000");
+  };
+  // 第一个参数是个数组，可有多个装饰器
+  Product = __esDecorate([ProductDecorator], Product);
+  console.log("Product", Product); // Product [Function: Product]
+  return Product;
+})();
