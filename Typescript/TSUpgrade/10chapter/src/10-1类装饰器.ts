@@ -4,8 +4,6 @@ function ProductDecorator(targetClass: any) {
   // targetClass实际上就是类
   const target = new targetClass();
   target.buy(); // 购买iphone
-  console.log(Object.keys(targetClass.prototype));
-  console.log("targetClass.name", targetClass.name); // Product
 }
 @ProductDecorator
 class Product {
