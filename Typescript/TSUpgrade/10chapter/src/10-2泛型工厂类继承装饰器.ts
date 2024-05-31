@@ -2,13 +2,14 @@
 
 // 需要使用泛型限制
 function LogInfo<T extends { new(...args: any): any }>(target: T) {
-    // 继承父类
+    // 继承父类  
     class Logger extends target {
         constructor(...args: any) {
             super(...args);
             console.log("Logger 日志信息打印")
         }
     }
+    // 使用匿名类 class extends target
     return Logger
 }
 
