@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>clientWidth,scrollWidth,offsetWidth区别</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        background-color: #ccc;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        color: #fff;
+        background-color: #000;
+        border: 10px solid #f00;
+        padding: 10px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">12311111111111111111</div>
+  </body>
+  <!-- 
+        1、clientWidth：只读属性 Element.clientWidth 对于内联元素以及没有 CSS 样式的元素为 0；否则，它是元素内部的宽度（以像素为单位）。该属性包括内边距（padding），但不包括边框（border）、外边距（margin）和垂直滚动条（如果存在）。clientWidth = content + padding
+        box-sizing: border-box; clientWidth = 100 - 10 *2 = 80（宽度 - 边框）
+        box-sizing: content-box; clientWidth = 100 + 10 *2 = 120 （宽度 + 边距）
+
+
+        2、offsetWidth：是一个只读属性，返回一个元素的布局宽度。一个典型的（译者注：各浏览器的 offsetWidth 可能有所不同）offsetWidth 是测量包含元素的边框 (border)、水平线上的内边距 (padding)、竖直方向滚动条 (scrollbar)（如果存在的话）、以及 CSS 设置的宽度 (width) 的值。
+        box-sizing: border-box; clientWidth = 100（宽度 ）
+        box-sizing: content-box; clientWidth = 100 + 10 *2 + 10*2 = 140 （宽度 + 边距 + 边框）
+
+        3、scrollWidth：这个只读属性是元素内容宽度的一种度量，包括由于 overflow 溢出而在屏幕上不可见的内容。scrollWidth值等于元素在不使用水平滚动条的情况下适合视口中的所有内容所需的最小宽度。宽度的测量方式与clientWidth相同：它包含元素的内边距，但不包括边框，外边距或垂直滚动条（如果存在）。它还可以包括伪元素的宽度，例如::before或::after。如果元素的内容可以适合而不需要水平滚动条，则其scrollWidth等于clientWidth
+        未超出：和clientWidth计算一样
+        超出：文字区域+ padding 区域的宽度
+  -->
+</html>
