@@ -1,13 +1,13 @@
 import { Inject } from "./Injectdecorator";
-import { PeopleService } from "./PeopleService";
+import { UserService } from "./UserService";
 import CollectionInstance from "./Collection";
 import ControllerDecorator from "./ControllerDecorator";
 import MethodDecorator from "./MethodDecorator";
 
 @ControllerDecorator
 class Controller {
-  @Inject("peopleService") // 依赖注入 创建和使用分离
-  private peopleService?: PeopleService;
+  @Inject("userService") // 依赖注入 创建和使用分离
+  private userService?: UserService;
 
   @MethodDecorator("/login")
   public login() {
