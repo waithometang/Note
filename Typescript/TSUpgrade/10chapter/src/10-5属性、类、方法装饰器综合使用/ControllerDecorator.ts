@@ -1,20 +1,13 @@
-import { Inject } from "./Injectdecorator";
-import { PeopleService } from "./PeopleService";
-import CollectionInstance from "./Collection";
-import ControllerDecorator from "./ControllerDecorator";
-import MethodDecorator from "./MethodDecorator";
-
-@ControllerDecorator
-class Controller {
-  @Inject("peopleService") // 依赖注入 创建和使用分离
-  private peopleService?: PeopleService;
-
-  @MethodDecorator("/login")
-  public login() {
-    let peopleService = CollectionInstance.get("userService");
-    peopleService.login();
-  }
+import "reflect-metadata";
+export default function ControllerDecorator(rootPath: string) {
+  return function <T extends { new (...args: any): any }>(targetClass: T) {
+    Object.keys(targetClass.prototype).forEach((methodname) => {
+      let routerpath = Reflect.getMetadata(
+        "path",
+        targetClass.prototype,
+        methodname
+      );
+      console.log("routerpath", routerpath);
+    });
+  };
 }
-let controller = new Controller();
-controller.login();
-export {};
