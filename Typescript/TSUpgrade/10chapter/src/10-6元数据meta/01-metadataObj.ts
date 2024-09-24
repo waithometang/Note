@@ -1,3 +1,5 @@
+// 在对象上获取元数据
+
 import "reflect-metadata";
 
 const obj = {
@@ -27,3 +29,5 @@ if (Reflect.hasMetadata("propName", obj, "name")) {
 } else {
   console.log("不存在name元数据");
 }
+
+export {};

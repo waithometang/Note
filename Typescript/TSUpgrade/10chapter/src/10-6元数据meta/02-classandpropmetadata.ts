@@ -1,3 +1,5 @@
+// 在类和方法上获取获取元数据
+
 import "reflect-metadata";
 
 @Reflect.metadata("describe", "地球人")
