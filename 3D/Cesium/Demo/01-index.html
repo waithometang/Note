@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入包 -->
+    <script src="../Cesium-1.121/Build/Cesium/Cesium.js "></script>
+    <!-- 引入样式 -->
+    <link
+      rel="stylesheet"
+      href="../Cesium-1.121//Build/Cesium/Widgets/widgets.css"
+    />
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    #cesiumContainer {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+  </style>
+  <body>
+    <div id="cesiumContainer"></div>
+  </body>
+  <script>
+    // 创建独立的token
+    Cesium.Ion.defaultAccessToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYTZkZTU3MS0wYTI4LTQ0NDQtYmY4My05ZjA4Yjk2YmMwZGYiLCJpZCI6MjQ0MDY4LCJpYXQiOjE3MjcyNzMxOTd9.oXrtk8x_ASVxQQD8tIA2-xTGxJqUIbmhL7jNekq-_m4";
+    // 创建容器
+    var viewer = new Cesium.Viewer("cesiumContainer");
+  </script>
+</html>
