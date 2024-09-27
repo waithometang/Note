@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="app">
+      <div>
+        <p></p>
+      </div>
+    </div>
+  </body>
+  <script>
+    // 命令式编程：关注过程
+
+    // 比如在指定的div中展示Hello world
+    // const divEl = document.querySelector(".app");
+    // divEl.innerHTML = "Hello world";
+
+    // 在指定的div子元素div的p中，展示Hello world
+    const divEl = document.querySelector(".app");
+    const subDiv = divEl.querySelector("div");
+    const subP = subDiv.querySelector("p");
+    subP.innerHTML = "Hello world";
+  </script>
+</html>
