@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    // 根据以下对象生成<div class="test">hello render</div>
+    const vnode = {
+      type: "div",
+      props: {
+        class: "test",
+      },
+      children: "hello render",
+    };
+    function render(vnode) {
+      const divEl = document.createElement(vnode.type);
+      divEl.className = vnode.props.class;
+      divEl.innerText = vnode.children;
+
+      document.body.appendChild(divEl);
+    }
+
+    render(vnode);
+  </script>
+</html>
