@@ -53,6 +53,27 @@ service
 
 program.addCommand(service);
 
+// 当前脚手架+install
+program
+  .command("install [name]", "install one or more packages", {
+    // 指定自定义名称
+    executableFile: "imooc-cli",
+  })
+  .alias("i");
+
+// 命令参数 如果没匹配到，会进入这里
+program
+  .argument("<username>") // name: string, description?: string, defaultValue?: unknown 可接收三个参数
+  .argument("[password]")
+  .description("test command", {
+    username: "user login",
+    password: "user pwd",
+  })
+  .action((username, password) => {
+    console.log("username:", username);
+    console.log("password:", password);
+  });
+
 // 这个需要放在最后，用来解析参数
 program.parse(process.argv);
 // program.outputHelp();
