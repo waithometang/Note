@@ -16,6 +16,7 @@ const arg = hideBin(process.argv);
  * epilogue:在使用说明末尾打印的消息
  * options:自定义命令选项
  * option:和上面一样,参数不一样
+ * group:组
  */
 const cli = yargs(arg);
 
@@ -46,6 +47,38 @@ cli
   })
   .group("run", "Run:")
   .strict()
-  .locale("en").argv;
+  .locale("en")
+  .command(
+    "init [name]",
+    "Do init a project",
+    (yargs) => {
+      yargs.option("name", {
+        type: "string",
+        describe: "Name of a project",
+        alias: "n",
+      });
+    },
+    (argv) => {
+      console.log(argv);
+    }
+  )
+  .command({
+    command: "get",
+    describe: "make a get HTTP request",
+    alias: "g",
+    builder: function (yargs) {
+      return yargs.option("u", {
+        alias: "url",
+        describe: "the URL to make an HTTP request to",
+      });
+    },
+    handler: function (argv) {
+      console.log(argv.url);
+    },
+  })
+  .recommendCommands()
+  .fail((msg, err) => {
+    console.log(msg, err);
+  }).argv;
 
-console.log("imooc yargs1", arg);
+// console.log("imooc yargs1", arg);
