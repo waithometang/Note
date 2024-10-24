@@ -1,6 +1,6 @@
 // https://www.npmjs.com/package/ora
 
-import ora from "ora";
+import ora, { oraPromise } from "ora";
 
 // ora可传参数，string或者object
 // string-相当于spinner.text = "xxx"
@@ -20,3 +20,20 @@ setTimeout(() => {
   spinner.fail("fail");
   //   spinner.stop();
 }, 2000);
+
+// Starts a spinner for a promise or promise-returning function. The spinner is stopped with .succeed() if the promise fulfills or with .fail() if it rejects. Returns the promise.
+
+/**
+ * oraPromise(action, text)
+   oraPromise(action, options)
+ */
+(async function () {
+  function promise() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
+      }, 3000);
+    });
+  }
+  await oraPromise(promise);
+})();
