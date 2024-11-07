@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require("../inquirer/index.js");
+require("../list/index.js");

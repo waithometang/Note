@@ -31,17 +31,17 @@ prompt([
   //   message: "yes/no",
   //   default: false,
   // },
-  // {
-  //   type: "list",
-  //   name: "choice",
-  //   message: "choices",
-  //   default: 2,
-  //   choices: [
-  //     { name: "1", value: 1 },
-  //     { name: "2", value: 2 },
-  //     { name: "3", value: 3 },
-  //   ],
-  // },
+  {
+    type: "list",
+    name: "choice",
+    message: "choices",
+    default: 2,
+    choices: [
+      { name: "1", value: 1 },
+      { name: "2", value: 2 },
+      { name: "3", value: 3 },
+    ],
+  },
   // {
   //   type: "rawlist",
   //   name: "choice",
@@ -81,11 +81,11 @@ prompt([
   //   message: "input password",
   //   mask: "*",
   // },
-  {
-    type: "editor",
-    name: "editor",
-    message: "input content:",
-  },
+  // {
+  //   type: "editor",
+  //   name: "editor",
+  //   message: "input content:",
+  // },
 ])
   .then((answer) => {
     console.log(answer);
