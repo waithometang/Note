@@ -1,7 +1,21 @@
+/**
+ * 命令行实现步骤
+ * constructor 
+     EventEmitter -> MuteStream实例化 -> 获取输入输出流 -> readline实例化 -> 键盘监听 -> 参数解析
+    
+    render
+     output.unmute -> 清屏 -> 生成内容 -> 打印内容 -> output.mute
+    
+    keypress
+     up/down -> 更新selected
+     enter -> close -> set hasselected true -> render -> emit exit
+ */
+
 const { EventEmitter } = require("events");
 const MuteStream = require("mute-stream");
 const readline = require("readline");
 const { fromEvent } = require("rxjs");
+const ansiEscapes = require("ansi-escapes");
 
 const option = {
   type: "list",
@@ -28,6 +42,9 @@ function Prompt(option) {
     try {
       const list = new List(option);
       list.render();
+      list.on("emit", function (answer) {
+        resolve(answer);
+      });
     } catch (e) {
       reject(e);
     }
@@ -56,7 +73,27 @@ class List extends EventEmitter {
     this.hasSelected = false;
   }
 
-  onkeypress = (keymap) => {};
+  onkeypress = (keymap) => {
+    const key = keymap[1];
+    if (key.name === "down") {
+      this.selected++;
+      if (this.selected > this.choices.length - 1) {
+        this.selected = 0;
+      }
+      this.render();
+    } else if (key.name === "up") {
+      this.selected--;
+      if (this.selected < 0) {
+        this.selected = this.choices.length - 1;
+      }
+      this.render();
+    } else if (key.name === "return") {
+      this.hasSelected = true;
+      this.render();
+      this.close();
+      this.emit("exit", this.choices[this.selected]);
+    }
+  };
 
   render() {
     this.output.unmute();
@@ -83,12 +120,26 @@ class List extends EventEmitter {
           }
         }
       });
+      this.height = this.choices.length + 1;
       return title;
     } else {
+      const name = this.choices[this.selected].name;
+      let title = this.message + " " + name;
+      return title;
     }
   };
 
-  clean() {}
+  clean() {
+    const emptyLines = ansiEscapes.eraseLines(this.height);
+    this.output.write(emptyLines);
+  }
+
+  close() {
+    this.output.unmute();
+    this.rl.output.end();
+    this.rl.pause();
+    this.rl.close();
+  }
 }
 
 Prompt(option).then((answer) => {
