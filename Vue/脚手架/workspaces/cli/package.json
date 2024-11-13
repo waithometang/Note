@@ -13,6 +13,10 @@
     "imooc-hyn-cli": "bin/cli.mjs"
   },
   "dependencies": {
-    "@twhtestgroup/imooc-test-a": "^1.0.0"
+    "@twhtestgroup/imooc-test-a": "^1.0.0",
+    "@twhtestgroup/imooc-test-b": "^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
