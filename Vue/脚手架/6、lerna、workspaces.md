@@ -2,7 +2,13 @@
 
 - 架构使用
 
+  [lerna]: https://lerna.js.org/docs/api-reference/commands
+
 ![image-20241112230733385](C:\Users\tangweihong\AppData\Roaming\Typora\typora-user-images\image-20241112230733385.png)
+
+- 项目创建 `npx lerna xxx`
+- 查看帮助 `npx lerna -h`
+- 创建子项目 `npx lerna create xxx`
 
 # workspaces
 
