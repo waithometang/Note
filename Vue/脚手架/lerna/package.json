@@ -4,7 +4,11 @@
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@twhtestgroup/lerna-test-a": "^1.0.0",
+    "chalk": "^5.3.0",
+    "workspace": "^0.0.1-preview.1"
+  },
   "devDependencies": {
     "lerna": "^8.1.9"
   }

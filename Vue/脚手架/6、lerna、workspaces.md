@@ -6,9 +6,20 @@
 
 ![image-20241112230733385](C:\Users\tangweihong\AppData\Roaming\Typora\typora-user-images\image-20241112230733385.png)
 
-- 项目创建 `npx lerna xxx`
+- 项目创建 `npx lerna init`
+
 - 查看帮助 `npx lerna -h`
+
 - 创建子项目 `npx lerna create xxx`
+
+  （PS：lerna新版本已推荐使用workspace）
+
+1. 全局安装 `npm install -g lerna`
+2. 初始化项目 `lerna init`
+3. 新增模块 `lerna create xxx`
+4. 子模块安装依赖 `npm install xxx(依赖名) workspace/-w xxx(模块名)`
+
+​	
 
 # workspaces
 

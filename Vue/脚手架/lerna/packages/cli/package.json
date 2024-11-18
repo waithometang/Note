@@ -1,0 +1,29 @@
+{
+  "name": "@twhtestgroup/lerna-test-cli",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "waithometang <weihongtang66@gmail.com>",
+  "homepage": "https://github.com/waithometang/Note#readme",
+  "license": "ISC",
+  "main": "lib/cli.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmmirror.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waithometang/Note.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/cli.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/waithometang/Note/issues"
+  }
+}
