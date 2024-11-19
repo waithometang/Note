@@ -19,6 +19,10 @@
 3. 新增模块 `lerna create xxx`
 4. 子模块安装依赖 `npm install xxx(依赖名) workspace/-w xxx(模块名)`
 
+### 	源码分析
+
+![image-20241119221214913](C:\Users\tangweihong\AppData\Roaming\Typora\typora-user-images\image-20241119221214913.png)
+
 ​	
 
 # workspaces
